@@ -19,6 +19,8 @@ import com.example.employeePayrollApp.model.EmployeePayrollDTO;
 import com.example.employeePayrollApp.model.ResponseDTO;
 import com.example.employeePayrollApp.services.IEmployeePayrollService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
@@ -45,7 +47,7 @@ public class EmployeePayrollController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> addEmployeePayrollData( @RequestBody EmployeePayrollDTO employeePayrollDTO){
+	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid  @RequestBody EmployeePayrollDTO employeePayrollDTO){
 		System.out.println("post");
 		EmployeePayrollData empData =null;
 		empData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
@@ -55,7 +57,7 @@ public class EmployeePayrollController {
 
 	@PutMapping("/update/{empId}")
 	public ResponseEntity<ResponseDTO> updateEmployeePayrollData( @PathVariable("empId") int empId,
-	                                                             @RequestBody EmployeePayrollDTO employeePayrollDTO){
+	                                                             @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO){
 		System.out.println("Put");
 		EmployeePayrollData empData =null;
 		empData = employeePayrollService.updateEmployeePayrollData(empId,employeePayrollDTO);
